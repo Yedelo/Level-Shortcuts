@@ -19,5 +19,8 @@
 	"issues": {
 		"info": "Report issues to the issue tracker on GitHub or to yedel on discord",
 		"url": "https://github.com/Yedelo/Level-Shortcuts/issues"
+	},
+	"dependencies": {
+		"geode.node-ids": "1.21.1"
 	}
 }
