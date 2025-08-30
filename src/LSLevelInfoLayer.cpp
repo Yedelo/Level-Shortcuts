@@ -2,6 +2,8 @@
 
 using namespace geode::prelude;
 
+#include "LevelShortcuts.hpp"
+
 #include <Geode/modify/LevelInfoLayer.hpp>
 class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 	bool init(GJGameLevel* level, bool challenge) {
@@ -9,7 +11,7 @@ class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 
 		if (CCMenu* leftSideMenu = geode::cast::typeinfo_cast<CCMenu*>(getChildByID("left-side-menu"))) {
 			CCSprite* setShortcutSprite = CCSprite::create("setShortcut.png"_spr);
-			CCMenuItemSpriteExtra* setShortcutButton = CCMenuItemSpriteExtra::create(setShortcutSprite, this, menu_selector(LSLevelInfoLayer::setShortcut));
+			CCMenuItemSpriteExtra* setShortcutButton = CCMenuItemSpriteExtra::create(setShortcutSprite, this, menu_selector(LSLevelInfoLayer::onSetShortcut));
 			setShortcutButton->setID("set-shortcut-button"_spr);
 			leftSideMenu->addChild(setShortcutButton);
 			leftSideMenu->updateLayout();
@@ -17,8 +19,8 @@ class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 
 		return true;
 	}
-
-	void setShortcut(CCObject* sender) {
-		log::info("setShortcut");
+	
+	void onSetShortcut(CCObject* sender) {
+		setShortcut(ONLINE, m_level->m_levelID.value());
 	}
 };
