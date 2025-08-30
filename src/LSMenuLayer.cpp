@@ -10,7 +10,7 @@ class $modify(LSMenuLayer, MenuLayer) {
         
     
 		if (CCMenu* rightSideMenu = geode::cast::typeinfo_cast<CCMenu*>(getChildByID("right-side-menu"))) {
-			CircleButtonSprite* openShortcutSprite = CircleButtonSprite::createWithSprite("logo.png"_spr);
+			CircleButtonSprite* openShortcutSprite = CircleButtonSprite::createWithSprite("openShortcut.png"_spr);
 			CCMenuItemSpriteExtra* openShortcutButton = CCMenuItemSpriteExtra::create(openShortcutSprite, this, menu_selector(LSMenuLayer::openShortcut));
 			openShortcutButton->setID("open-shortcut-button"_spr);
 			rightSideMenu->addChild(openShortcutButton);

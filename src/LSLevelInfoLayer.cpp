@@ -8,7 +8,7 @@ class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 		if (!LevelInfoLayer::init(level, challenge)) return false;
 
 		if (CCMenu* leftSideMenu = geode::cast::typeinfo_cast<CCMenu*>(getChildByID("left-side-menu"))) {
-			CircleButtonSprite* setShortcutSprite = CircleButtonSprite::createWithSprite("logo.png"_spr);
+			CircleButtonSprite* setShortcutSprite = CircleButtonSprite::createWithSprite("setShortcut.png"_spr);
 			CCMenuItemSpriteExtra* setShortcutButton = CCMenuItemSpriteExtra::create(setShortcutSprite, this, menu_selector(LSLevelInfoLayer::setShortcut));
 			setShortcutButton->setID("set-shortcut-button"_spr);
 			leftSideMenu->addChild(setShortcutButton);
