@@ -1,3 +1,3 @@
-# Template Mod
+# Level Shortcuts
 
-Edit about.md to change this
+Adds a shortcut to online levels

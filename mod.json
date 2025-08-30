@@ -10,5 +10,14 @@
 	"name": "Level Shortcuts",
 	"version": "v1.0.0",
 	"developer": "Yedel",
-	"description": "Adds shortcuts to online levels"
+	"description": "Adds a shortcut to online levels",
+	"tags": ["utility"],
+	"links": {
+		"homepage": "https://geode-sdk.org/mods/yedel.level_shortcuts",
+		"source": "https://github.com/Yedelo/Level-Shortcuts"
+	},
+	"issues": {
+		"info": "Report issues to the issue tracker on GitHub or to yedel on discord",
+		"url": "https://github.com/Yedelo/Level-Shortcuts/issues"
+	}
 }
