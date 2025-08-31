@@ -5,6 +5,7 @@
 using namespace geode::prelude;
 
 #define ONLINE 1
+#define EDITOR 2
 
 #define STRINGIFY(x) #x
 #define STRING(x) STRINGIFY(x)
@@ -12,7 +13,7 @@ using namespace geode::prelude;
 
 inline void setShortcut(int type, auto data) {
     Mod::get()->setSavedValue("shortcut-type", type);
-    Mod::get()->setSavedValue(DATA_FOR_TYPE(ONLINE), data);
+    Mod::get()->setSavedValue(fmt::format("data-for-type-{}", type), data);
     FLAlertLayer::create(
         "Level Shortcut Saved",
         fmt::format("Saved this level as the level shortcut! (shortcut type {} -> {})", type, data),
