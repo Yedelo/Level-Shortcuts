@@ -23,6 +23,11 @@ class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 	}
 	
 	void onSetShortcut(CCObject* sender) {
-		setShortcut(ONLINE, m_level->m_levelID.value());
+		if (int dailyWeeklyEventID = m_level->m_dailyID.value()) {
+			setShortcut(DAILY_WEEKLY_EVENT, dailyWeeklyEventID);
+		}
+		else {
+			setShortcut(ONLINE, m_level->m_levelID.value());
+		}
 	}
 };

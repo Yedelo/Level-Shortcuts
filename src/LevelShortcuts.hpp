@@ -6,6 +6,7 @@ using namespace geode::prelude;
 
 #define ONLINE 1
 #define EDITOR 2
+#define DAILY_WEEKLY_EVENT 3
 
 #define STRINGIFY(x) #x
 #define STRING(x) STRINGIFY(x)
@@ -57,6 +58,20 @@ inline void openShortcut() {
                     return;
                 }
                 switchToScene(EditLevelLayer::create(level));
+                break;
+            }
+            case DAILY_WEEKLY_EVENT: {
+                int dailyWeeklyEventID = Mod::get()->getSavedValue(DATA_FOR_TYPE(DAILY_WEEKLY_EVENT), -1);
+                if (dailyWeeklyEventID == -1) {
+                    showError("No daily/weekly/event ID was found! What.");
+                    return;
+                }
+                GJGameLevel* level = GameLevelManager::get()->getSavedDailyLevel(dailyWeeklyEventID);
+                if (!level) {
+                    showError(fmt::format("No daily/weekly/event level with id {} was found!", dailyWeeklyEventID));
+                    return;
+                }
+                switchToScene(LevelInfoLayer::create(level, false));
                 break;
             }
         }
