@@ -12,12 +12,14 @@ class $modify(LSMenuLayer, MenuLayer) {
     bool init() {
         if (!MenuLayer::init()) return false;
         
-        if (CCMenu* rightSideMenu = geode::cast::typeinfo_cast<CCMenu*>(getChildByID("right-side-menu"))) {
-            CCSprite* openShortcutSprite = CCSprite::create("openShortcut.png"_spr);
-            CCMenuItemSpriteExtra* openShortcutButton = CCMenuItemSpriteExtra::create(openShortcutSprite, this, menu_selector(LSMenuLayer::openShortcut));
-            openShortcutButton->setID("open-shortcut-button"_spr);
-            rightSideMenu->addChild(openShortcutButton);
-            rightSideMenu->updateLayout();
+        if (Mod::get()->getSettingValue<bool>("enabled")) {
+            if (CCMenu* rightSideMenu = geode::cast::typeinfo_cast<CCMenu*>(getChildByID("right-side-menu"))) {
+                CCSprite* openShortcutSprite = CCSprite::create("openShortcut.png"_spr);
+                CCMenuItemSpriteExtra* openShortcutButton = CCMenuItemSpriteExtra::create(openShortcutSprite, this, menu_selector(LSMenuLayer::openShortcut));
+                openShortcutButton->setID("open-shortcut-button"_spr);
+                rightSideMenu->addChild(openShortcutButton);
+                rightSideMenu->updateLayout();
+            }
         }
         
         return true;
@@ -60,7 +62,7 @@ class $modify(LSMenuLayer, MenuLayer) {
                 break;
             }
         }
-    
+        
     }
 };
 

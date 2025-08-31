@@ -27,5 +27,12 @@
 		"sprites": [
 			"resources/*.png"
 		]
+	},
+	"settings": {
+		"enabled": {
+			"type": "bool",
+			"name": "Enabled",
+			"default": true
+		}
 	}
 }

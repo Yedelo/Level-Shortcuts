@@ -8,15 +8,17 @@ using namespace geode::prelude;
 class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 	bool init(GJGameLevel* level, bool challenge) {
 		if (!LevelInfoLayer::init(level, challenge)) return false;
-
-		if (CCMenu* leftSideMenu = geode::cast::typeinfo_cast<CCMenu*>(getChildByID("left-side-menu"))) {
-			CCSprite* setShortcutSprite = CCSprite::create("setShortcut.png"_spr);
-			CCMenuItemSpriteExtra* setShortcutButton = CCMenuItemSpriteExtra::create(setShortcutSprite, this, menu_selector(LSLevelInfoLayer::onSetShortcut));
-			setShortcutButton->setID("set-shortcut-button"_spr);
-			leftSideMenu->addChild(setShortcutButton);
-			leftSideMenu->updateLayout();
+		
+		if (Mod::get()->getSettingValue<bool>("enabled")) {
+			if (CCMenu* leftSideMenu = geode::cast::typeinfo_cast<CCMenu*>(getChildByID("left-side-menu"))) {
+				CCSprite* setShortcutSprite = CCSprite::create("setShortcut.png"_spr);
+				CCMenuItemSpriteExtra* setShortcutButton = CCMenuItemSpriteExtra::create(setShortcutSprite, this, menu_selector(LSLevelInfoLayer::onSetShortcut));
+				setShortcutButton->setID("set-shortcut-button"_spr);
+				leftSideMenu->addChild(setShortcutButton);
+				leftSideMenu->updateLayout();
+			}
 		}
-
+		
 		return true;
 	}
 	
