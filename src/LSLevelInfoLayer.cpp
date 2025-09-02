@@ -10,6 +10,7 @@ class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 		bool openedLevelFromShortcut = false;
 	};
 
+	$override
 	bool init(GJGameLevel* level, bool challenge) {
 		if (!LevelInfoLayer::init(level, challenge)) return false;
 		
