@@ -24,6 +24,7 @@ class $modify(LSEditLevelLayer, EditLevelLayer) {
     }
     
     void onSetShortcut(CCObject* sender) {
-        setShortcut(EDITOR, LocalLevelManager::get()->m_localLevels->indexOfObject(m_level));
+        setShortcut(EDITOR);
+        Mod::get()->setSavedValue("editorLevelIndex", LocalLevelManager::get()->m_localLevels->indexOfObject(m_level));
     }
 };
