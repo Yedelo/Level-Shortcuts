@@ -1,3 +1,3 @@
 # Level Shortcuts
 
-Adds a shortcut to online levels
+Adds a shortcut to access different levels
