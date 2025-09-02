@@ -29,6 +29,10 @@ inline void openShortcut() {
         return;
     }
     switch (shortcutType) {
+        default: {
+            showError(fmt::format("Invalid shortcut type <cj>{}</c>!\nTry setting another shortcut.", shortcutType));
+            break;
+        }
         case EDITOR: {
             int levelIndex = Mod::get()->getSavedValue("editor-level-index", -1);
             if (levelIndex == -1) {
