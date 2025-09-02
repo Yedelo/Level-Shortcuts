@@ -49,7 +49,12 @@ inline void openShortcut() {
                     showError("No level index was found! What.");
                     return;
                 } 
-                GJGameLevel* level = geode::cast::typeinfo_cast<GJGameLevel*>(LocalLevelManager::get()->m_localLevels->objectAtIndex(levelIndex));
+                CCArray* localLevels = LocalLevelManager::get()->m_localLevels;
+                if (levelIndex < 0 || levelIndex > localLevels->capacity()) {
+                    showError(fmt::format("Invalid local level index {}!", levelIndex));
+                    return;
+                }
+                GJGameLevel* level = geode::cast::typeinfo_cast<GJGameLevel*>(localLevels->objectAtIndex(levelIndex));
                 if (!level) {
                     showError(fmt::format("No local level with index {} was found! Perhaps the level was deleted?", levelIndex));
                     return;
