@@ -3,13 +3,10 @@
 using namespace geode::prelude;
 
 #include "LevelShortcuts.hpp"
+#include "GauntletFix.hpp"
 
 #include <Geode/modify/LevelInfoLayer.hpp>
 class $modify(LSLevelInfoLayer, LevelInfoLayer) {
-	struct Fields {
-		bool openedLevelFromShortcut = false;
-	};
-
 	$override
 	bool init(GJGameLevel* level, bool challenge) {
 		if (!LevelInfoLayer::init(level, challenge)) return false;
@@ -29,10 +26,15 @@ class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 
 	$override
 	void onBack(CCObject* sender) {
-		if (m_fields->openedLevelFromShortcut) {
+		if (m_level->m_gauntletLevel && GauntletFix::isOpenedFromShortcut(m_level->m_levelID)) {
 			m_level->m_gauntletLevel = false;
+			LevelInfoLayer::onBack(sender);
+			m_level->m_gauntletLevel = true;
+			GauntletFix::setOpenedFromShortcut(m_level->m_levelID, false);
 		}
-		LevelInfoLayer::onBack(sender);
+		else {
+			LevelInfoLayer::onBack(sender);
+		}
 	}
 	
 	void onSetShortcut(CCObject* sender) {
@@ -46,7 +48,3 @@ class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 		}
 	}
 };
-
-void doGauntletFix(LevelInfoLayer* layer) {
-	static_cast<LSLevelInfoLayer*>(layer)->m_fields->openedLevelFromShortcut = true;
-}

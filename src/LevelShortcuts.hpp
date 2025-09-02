@@ -81,9 +81,8 @@ inline void openShortcut() {
                 if (!level) {
                     showError(fmt::format("No gauntlet level found with ID {}!", levelID));
                 }
-                LevelInfoLayer* layer = LevelInfoLayer::create(level, false);
-                doGauntletFix(layer);
-                switchToScene(layer);
+                GauntletFix::setOpenedFromShortcut(levelID, true);
+                switchToScene(LevelInfoLayer::create(level, false));
                 break;
             }
         }
