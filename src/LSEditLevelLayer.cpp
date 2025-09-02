@@ -12,7 +12,7 @@ class $modify(LSEditLevelLayer, EditLevelLayer) {
         
         if (Mod::get()->getSettingValue<bool>("enabled")) {
             if (CCMenu* folderMenu = geode::cast::typeinfo_cast<CCMenu*>(getChildByID("folder-menu"))) {
-                CCSprite* setShortcutSprite = CCSprite::create("setShortcut.png"_spr);
+                CircleButtonSprite* setShortcutSprite = CircleButtonSprite::createWithSprite("setShortcut.png"_spr);
                 CCMenuItemSpriteExtra* setShortcutButton = CCMenuItemSpriteExtra::create(setShortcutSprite, this, menu_selector(LSEditLevelLayer::onSetShortcut));
                 setShortcutButton->setID("set-shortcut-button"_spr);
                 folderMenu->addChild(setShortcutButton);

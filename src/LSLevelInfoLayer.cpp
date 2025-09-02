@@ -15,7 +15,7 @@ class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 		
 		if (Mod::get()->getSettingValue<bool>("enabled")) {
 			if (CCMenu* leftSideMenu = geode::cast::typeinfo_cast<CCMenu*>(getChildByID("left-side-menu"))) {
-				CCSprite* setShortcutSprite = CCSprite::create("setShortcut.png"_spr);
+				CircleButtonSprite* setShortcutSprite = CircleButtonSprite::createWithSprite("setShortcut.png"_spr);
 				CCMenuItemSpriteExtra* setShortcutButton = CCMenuItemSpriteExtra::create(setShortcutSprite, this, menu_selector(LSLevelInfoLayer::onSetShortcut));
 				setShortcutButton->setID("set-shortcut-button"_spr);
 				leftSideMenu->addChild(setShortcutButton);
