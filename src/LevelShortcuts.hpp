@@ -85,6 +85,7 @@ inline void openShortcut() {
             GJGameLevel* level = GameLevelManager::get()->getSavedGauntletLevel(levelID);
             if (!level) {
                 showError(fmt::format("No gauntlet level found with ID <cp>{}</c>!\nPerhaps you deleted the level?\nTry setting another shortcut.", levelID));
+                return;
             }
             GauntletFix::setOpenedFromShortcut(levelID, true);
             switchToScene(LevelInfoLayer::create(level, false));
