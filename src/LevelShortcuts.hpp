@@ -20,16 +20,13 @@ inline void setShortcut(int type) {
 };
 
 inline void openShortcut() {
-    log::info("openShortcut");
     int shortcutType = Mod::get()->getSavedValue("shortcut-type", -1);
-    log::info("shortcutType = {}", shortcutType);
         if (shortcutType == -1) {
             showError("No level shortcut found! Set one by entering a level screen and pressing the <cg>Set Shortcut</c> button.");
             return;
         }
         switch (shortcutType) {
             case ONLINE: {
-                log::info("case ONLINE");
                 int levelID = Mod::get()->getSavedValue("levelID", -1);
                 if (levelID == -1) {
                     showError("No level ID was found! What.");
@@ -44,7 +41,6 @@ inline void openShortcut() {
                 break;
             }
             case EDITOR: {
-                log::info("case EDITOR");
                 int levelIndex = Mod::get()->getSavedValue("editorLevelIndex", -1);
                 if (levelIndex == -1) {
                     showError("No level index was found! What.");
@@ -59,7 +55,6 @@ inline void openShortcut() {
                 break;
             }
             case DAILY_WEEKLY_EVENT: {
-                log::info("case DAILY_WEEKLY_EVENT");
                 int dailyWeeklyEventID = Mod::get()->getSavedValue("dailyWeeklyEventID", -1);
                 if (dailyWeeklyEventID == -1) {
                     showError("No daily/weekly/event ID was found! What.");
@@ -77,7 +72,6 @@ inline void openShortcut() {
 }
 
 inline void showError(std::string error) {
-    log::info("showError({})", error);
     FLAlertLayer::create(
         "No Shortcut Found",
         error,
