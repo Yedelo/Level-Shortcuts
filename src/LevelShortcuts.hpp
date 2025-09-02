@@ -30,7 +30,7 @@ inline void openShortcut() {
         }
         switch (shortcutType) {
             case ONLINE: {
-                int levelID = Mod::get()->getSavedValue("levelID", -1);
+                int levelID = Mod::get()->getSavedValue("level-id", -1);
                 if (levelID == -1) {
                     showError("No level ID was found! What.");
                     return;
@@ -44,7 +44,7 @@ inline void openShortcut() {
                 break;
             }
             case EDITOR: {
-                int levelIndex = Mod::get()->getSavedValue("editorLevelIndex", -1);
+                int levelIndex = Mod::get()->getSavedValue("editor-level-index", -1);
                 if (levelIndex == -1) {
                     showError("No level index was found! What.");
                     return;
@@ -58,7 +58,7 @@ inline void openShortcut() {
                 break;
             }
             case DAILY_WEEKLY_EVENT: {
-                int dailyWeeklyEventID = Mod::get()->getSavedValue("dailyWeeklyEventID", -1);
+                int dailyWeeklyEventID = Mod::get()->getSavedValue("daily-weekly-event-id", -1);
                 if (dailyWeeklyEventID == -1) {
                     showError("No daily/weekly/event ID was found! What.");
                     return;
@@ -72,7 +72,7 @@ inline void openShortcut() {
                 break;
             }
             case GAUNTLET: {
-                int levelID = Mod::get()->getSavedValue("levelID", -1);
+                int levelID = Mod::get()->getSavedValue("level-id", -1);
                 if (levelID == -1) {
                     showError("No level ID was found! What.");
                     return;

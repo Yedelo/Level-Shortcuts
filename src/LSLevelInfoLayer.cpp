@@ -40,11 +40,11 @@ class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 	void onSetShortcut(CCObject* sender) {
 		if (int dailyWeeklyEventID = m_level->m_dailyID.value()) {
 			setShortcut(DAILY_WEEKLY_EVENT);
-			Mod::get()->setSavedValue("dailyWeeklyEventID", dailyWeeklyEventID);
+			Mod::get()->setSavedValue("daily-weekly-event-id", dailyWeeklyEventID);
 		}
 		else {
 			setShortcut(m_level->m_gauntletLevel ? GAUNTLET : ONLINE);
-			Mod::get()->setSavedValue("levelID", m_level->m_levelID.value());
+			Mod::get()->setSavedValue("level-id", m_level->m_levelID.value());
 		}
 	}
 };
