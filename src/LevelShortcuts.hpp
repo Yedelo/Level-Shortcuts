@@ -7,6 +7,7 @@ using namespace geode::prelude;
 #define ONLINE 1
 #define EDITOR 2
 #define DAILY_WEEKLY_EVENT 3
+#define GAUNTLET 4
 
 void showError(std::string error);
 
@@ -64,6 +65,19 @@ inline void openShortcut() {
                 if (!level) {
                     showError(fmt::format("No daily/weekly/event level with id {} was found!", dailyWeeklyEventID));
                     return;
+                }
+                switchToScene(LevelInfoLayer::create(level, false));
+                break;
+            }
+            case GAUNTLET: {
+                int levelID = Mod::get()->getSavedValue("levelID", -1);
+                if (levelID == -1) {
+                    showError("No level ID was found! What.");
+                    return;
+                }
+                GJGameLevel* level = GameLevelManager::get()->getSavedGauntletLevel(levelID);
+                if (!level) {
+                    showError(fmt::format("No gauntlet level found with ID {}!", levelID));
                 }
                 switchToScene(LevelInfoLayer::create(level, false));
                 break;
