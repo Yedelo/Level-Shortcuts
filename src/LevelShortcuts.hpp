@@ -4,8 +4,8 @@
 
 using namespace geode::prelude;
 
-#define ONLINE 1
-#define EDITOR 2
+#define EDITOR 1
+#define ONLINE 2
 #define DAILY_WEEKLY_EVENT 3
 #define GAUNTLET 4
 
@@ -29,20 +29,6 @@ inline void openShortcut() {
         return;
     }
     switch (shortcutType) {
-        case ONLINE: {
-            int levelID = Mod::get()->getSavedValue("level-id", -1);
-            if (levelID == -1) {
-                showError("No level ID was found!\nTry setting another shortcut.");
-                return;
-            }
-            GJGameLevel* level = GameLevelManager::get()->getSavedLevel(levelID);
-            if (!level) {
-                showError(fmt::format("No online level with ID <cp>{}</c> was found!\nPerhaps you deleted the level from your saved levels?\nTry setting another shortcut.", levelID));
-                return;
-            }
-            switchToScene(LevelInfoLayer::create(level, false));
-            break;
-        }
         case EDITOR: {
             int levelIndex = Mod::get()->getSavedValue("editor-level-index", -1);
             if (levelIndex == -1) {
@@ -60,6 +46,20 @@ inline void openShortcut() {
                 return;
             }
             switchToScene(EditLevelLayer::create(level));
+            break;
+        }
+        case ONLINE: {
+            int levelID = Mod::get()->getSavedValue("level-id", -1);
+            if (levelID == -1) {
+                showError("No level ID was found!\nTry setting another shortcut.");
+                return;
+            }
+            GJGameLevel* level = GameLevelManager::get()->getSavedLevel(levelID);
+            if (!level) {
+                showError(fmt::format("No online level with ID <cp>{}</c> was found!\nPerhaps you deleted the level from your saved levels?\nTry setting another shortcut.", levelID));
+                return;
+            }
+            switchToScene(LevelInfoLayer::create(level, false));
             break;
         }
         case DAILY_WEEKLY_EVENT: {
