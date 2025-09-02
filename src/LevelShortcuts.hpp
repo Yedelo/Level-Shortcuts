@@ -1,107 +1,11 @@
 #pragma once
 
-#include <Geode/Geode.hpp>
-
-using namespace geode::prelude;
-
 #define EDITOR 1
 #define ONLINE 2
 #define DAILY_WEEKLY_EVENT 3
 #define GAUNTLET 4
 
-#include "GauntletFix.hpp"
+void setShortcut(int type);
+void openShortcut();
 
-void showError(std::string error);
 
-inline void setShortcut(int type) {
-    Mod::get()->setSavedValue("shortcut-type", type);
-    FLAlertLayer::create(
-        "Level Shortcut Saved",
-        fmt::format("Saved this level as the level shortcut!\n(shortcut type <cj>{}</c>)", type),
-        "OK"
-    )->show();
-};
-
-inline void openShortcut() {
-    int shortcutType = Mod::get()->getSavedValue("shortcut-type", -1);
-    if (shortcutType == -1) {
-        showError("No level shortcut found!\nSet one by entering a level screen and pressing the <cg>Set Shortcut</c> button.");
-        return;
-    }
-    switch (shortcutType) {
-        default: {
-            showError(fmt::format("Invalid shortcut type <cj>{}</c>!\nTry setting another shortcut.", shortcutType));
-            break;
-        }
-        case EDITOR: {
-            int levelIndex = Mod::get()->getSavedValue("editor-level-index", -1);
-            if (levelIndex == -1) {
-                showError("No local level index was found!\nTry setting another shortcut.");
-                return;
-            } 
-            CCArray* localLevels = LocalLevelManager::get()->m_localLevels;
-            if (levelIndex < 0 || levelIndex > localLevels->capacity()) {
-                showError(fmt::format("Invalid local level index <cp>{}</c>!\nTry setting another shortcut.", levelIndex));
-                return;
-            }
-            GJGameLevel* level = geode::cast::typeinfo_cast<GJGameLevel*>(localLevels->objectAtIndex(levelIndex));
-            if (!level) {
-                showError(fmt::format("No local level with index <cp>{}</c> was found!\nPerhaps you deleted the level?\nTry setting another shortcut.", levelIndex));
-                return;
-            }
-            switchToScene(EditLevelLayer::create(level));
-            break;
-        }
-        case ONLINE: {
-            int levelID = Mod::get()->getSavedValue("level-id", -1);
-            if (levelID == -1) {
-                showError("No level ID was found!\nTry setting another shortcut.");
-                return;
-            }
-            GJGameLevel* level = GameLevelManager::get()->getSavedLevel(levelID);
-            if (!level) {
-                showError(fmt::format("No online level with ID <cp>{}</c> was found!\nPerhaps you deleted the level from your saved levels?\nTry setting another shortcut.", levelID));
-                return;
-            }
-            switchToScene(LevelInfoLayer::create(level, false));
-            break;
-        }
-        case DAILY_WEEKLY_EVENT: {
-            int dailyWeeklyEventID = Mod::get()->getSavedValue("daily-weekly-event-id", -1);
-            if (dailyWeeklyEventID == -1) {
-                showError("No daily/weekly/event ID was found!\nTry setting another shortcut.");
-                return;
-            }
-            GJGameLevel* level = GameLevelManager::get()->getSavedDailyLevel(dailyWeeklyEventID);
-            if (!level) {
-                showError(fmt::format("No daily/weekly/event level with id <cp>{}</c> was found!\nPerhaps you deleted the level?\nTry setting another shortcut.", dailyWeeklyEventID));
-                return;
-            }
-            switchToScene(LevelInfoLayer::create(level, false));
-            break;
-        }
-        case GAUNTLET: {
-            int levelID = Mod::get()->getSavedValue("level-id", -1);
-            if (levelID == -1) {
-                showError("No level ID was found!\nTry setting another shortcut.");
-                return;
-            }
-            GJGameLevel* level = GameLevelManager::get()->getSavedGauntletLevel(levelID);
-            if (!level) {
-                showError(fmt::format("No gauntlet level found with ID <cp>{}</c>!\nPerhaps you deleted the level?\nTry setting another shortcut.", levelID));
-                return;
-            }
-            GauntletFix::setOpenedFromShortcut(levelID, true);
-            switchToScene(LevelInfoLayer::create(level, false));
-            break;
-        }
-    }
-}
-
-inline void showError(std::string error) {
-    FLAlertLayer::create(
-        "No Shortcut Found",
-        error,
-        "OK"
-    )->show();
-}
