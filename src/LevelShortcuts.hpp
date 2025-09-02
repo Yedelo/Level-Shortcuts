@@ -9,6 +9,8 @@ using namespace geode::prelude;
 #define DAILY_WEEKLY_EVENT 3
 #define GAUNTLET 4
 
+#include "GauntletFix.hpp"
+
 void showError(std::string error);
 
 inline void setShortcut(int type) {
@@ -79,7 +81,9 @@ inline void openShortcut() {
                 if (!level) {
                     showError(fmt::format("No gauntlet level found with ID {}!", levelID));
                 }
-                switchToScene(LevelInfoLayer::create(level, false));
+                LevelInfoLayer* layer = LevelInfoLayer::create(level, false);
+                doGauntletFix(layer);
+                switchToScene(layer);
                 break;
             }
         }

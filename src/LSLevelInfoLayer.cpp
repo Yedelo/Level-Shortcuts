@@ -6,6 +6,10 @@ using namespace geode::prelude;
 
 #include <Geode/modify/LevelInfoLayer.hpp>
 class $modify(LSLevelInfoLayer, LevelInfoLayer) {
+	struct Fields {
+		bool openedLevelFromShortcut = false;
+	};
+
 	bool init(GJGameLevel* level, bool challenge) {
 		if (!LevelInfoLayer::init(level, challenge)) return false;
 		
@@ -21,6 +25,14 @@ class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 		
 		return true;
 	}
+
+	$override
+	void onBack(CCObject* sender) {
+		if (m_fields->openedLevelFromShortcut) {
+			m_level->m_gauntletLevel = false;
+		}
+		LevelInfoLayer::onBack(sender);
+	}
 	
 	void onSetShortcut(CCObject* sender) {
 		if (int dailyWeeklyEventID = m_level->m_dailyID.value()) {
@@ -33,3 +45,7 @@ class $modify(LSLevelInfoLayer, LevelInfoLayer) {
 		}
 	}
 };
+
+void doGauntletFix(LevelInfoLayer* layer) {
+	static_cast<LSLevelInfoLayer*>(layer)->m_fields->openedLevelFromShortcut = true;
+}
