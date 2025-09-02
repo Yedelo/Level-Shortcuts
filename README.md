@@ -18,3 +18,5 @@ i also used saved levels
 and i had to use reverse engineering for a bit
 also used a class properly (?) for the first time
 that is about it
+
+🔥 blazing fast level accesses
