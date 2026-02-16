@@ -8,7 +8,7 @@
 	},
 	"id": "yedel.level_shortcuts",
 	"name": "Level Shortcuts",
-	"version": "v1.0.0",
+	"version": "v1.1.0-beta.2",
 	"developer": "Yedel",
 	"description": "Adds a shortcut to access different levels",
 	"tags": ["utility"],
